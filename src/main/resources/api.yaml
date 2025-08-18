@@ -1,0 +1,136 @@
+openapi: 3.0.3
+info:
+  title: Device Management API
+  description: API for managing device information with automatic IP pool synchronization
+  version: 1.0.0
+servers:
+  - url: 'http://localhost:8080'
+    description: Local development server
+paths:
+  /devices/{id}:
+    put:
+      summary: Update device Information
+      description: Updates device information and automatically synchronizes the IP pool
+      operationId: updateDevice
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The device ID
+          schema:
+            type: integer
+            format: int64
+            example: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceUpdateRequest"
+      responses:
+        '200':
+          description: Device updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DeviceResponse'
+        '400':
+          description: Bad request - invalid input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Device not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    DeviceUpdateRequest:
+      type: object
+      description: DTO for updating device information
+      properties:
+        imsi:
+          type: string
+          description: International Mobile Subscriber Identity
+          example: "123456789012345"
+          maxLength: 15
+        ip:
+          type: string
+          description: IP address assigned to the device
+          example: "192.168.1.100"
+          pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+        model:
+          type: string
+          description: Device model information
+          example: "iPhone 14"
+          maxLength: 100
+    DeviceCreateRequest:
+      type: object
+      description: DTO for creating a new device
+      required:
+        - imsi
+        - ip
+        - model
+      properties:
+        imsi:
+          type: string
+          description: International Mobile Subscriber Identity
+          example: "123456789012345"
+          maxLength: 15
+        ip:
+          type: string
+          description: IP address assigned to the device
+          example: "192.168.1.100"
+          pattern: '^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+        model:
+          type: string
+          description: Device model information
+          example: "iPhone 14"
+          maxLength: 100
+    DeviceResponse:
+      type: object
+      description: Device information response
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique device identifier
+          example: 1
+        imsi:
+          type: string
+          description: International Mobile Subscriber Identity
+          example: "123456789012345"
+        ip:
+          type: string
+          description: IP address assigned to the device
+          example: "192.168.1.100"
+        model:
+          type: string
+          description: Device model information
+          example: "iPhone 14"
+    ErrorResponse:
+      type: object
+      description: Error response format
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: "Device not found"
+        code:
+          type: string
+          description: Error code
+          example: "DEVICE_NOT_FOUND"
+        timestamp:
+          type: string
+          format: date-time
+          description: Error timestamp
+          example: "2024-01-15T10:30:00Z"

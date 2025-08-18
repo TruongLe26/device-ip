@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    devices:
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/devices
+        username: root
+        password:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        maximum-pool-size: 10
+    ips:
+        jdbc-url: jdbc:h2:mem:ips;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+        username: sa
+        password:
+        driver-class-name: org.h2.Driver
+        maximum-pool-size: 10
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: false
