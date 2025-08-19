@@ -1,0 +1,19 @@
+# These properties will be overridden by @DynamicPropertySource
+spring:
+  r2dbc:
+    device:
+      host: localhost
+      port: 3306
+      database: device
+      username: test
+      password:
+    ip:
+      protocol: mem
+      database: ipdb;MODE=MySQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+      username: sa
+      password:
+
+logging:
+  level:
+    org.springframework.r2dbc: DEBUG
+    reactor.netty: DEBUG

@@ -1,0 +1,13 @@
+spring:
+  r2dbc:
+    device:
+      host: ${SPRING_R2DBC_DEVICE_HOST:127.0.0.1}
+      port: ${SPRING_R2DBC_DEVICE_PORT:3306}
+      database: ${SPRING_R2DBC_DEVICE_DATABASE:device}
+      username: ${SPRING_R2DBC_DEVICE_USERNAME:root}
+      password: ${SPRING_R2DBC_DEVICE_PASSWORD}
+    ip:
+      protocol: ${SPRING_R2DBC_IP_PROTOCOL:mem}
+      database: ${SPRING_R2DBC_IP_DATABASE:ip;MODE=MySQL}
+      username: ${SPRING_R2DBC_IP_USERNAME:sa}
+      password: ${SPRING_R2DBC_IP_PASSWORD}

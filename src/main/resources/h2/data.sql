@@ -1,0 +1,2 @@
+INSERT INTO ip_address (imsi, ip) VALUES ('123456789012345', '192.168.1.100');
+INSERT INTO ip_address (imsi, ip) VALUES ('234567890123456', '192.168.1.101');
