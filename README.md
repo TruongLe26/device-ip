@@ -52,3 +52,4 @@ Navigate to the root directory of the project and run:
 ```bash
 mvn spring-boot:run
 ```
+Access the APIs by going to `http://localhost:8080/swagger-ui/index.html` in your browser or using a tool like Postman.
